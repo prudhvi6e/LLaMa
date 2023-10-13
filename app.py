@@ -4,12 +4,7 @@ from typing import Iterator
 import gradio as gr
 import spaces
 import torch
-from transformers import (
-    AutoConfig,
-    AutoModelForCausalLM,
-    AutoTokenizer,
-    TextIteratorStreamer,
-)
+from transformers import AutoModelForCausalLM, AutoTokenizer, TextIteratorStreamer
 
 MAX_MAX_NEW_TOKENS = 2048
 DEFAULT_MAX_NEW_TOKENS = 1024
@@ -41,11 +36,7 @@ if not torch.cuda.is_available():
 
 if torch.cuda.is_available():
     model_id = "meta-llama/Llama-2-13b-chat-hf"
-    config = AutoConfig.from_pretrained(model_id)
-    config.pretraining_tp = 1
-    model = AutoModelForCausalLM.from_pretrained(
-        model_id, config=config, torch_dtype=torch.float16, load_in_4bit=True, device_map="auto"
-    )
+    model = AutoModelForCausalLM.from_pretrained(model_id, device_map="auto", load_in_4bit=True)
     tokenizer = AutoTokenizer.from_pretrained(model_id)
     tokenizer.use_default_system_prompt = False
 
