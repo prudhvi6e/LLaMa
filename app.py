@@ -1,6 +1,11 @@
 from threading import Thread
 from typing import Iterator
 
+# We need to run this before importing gradio and spaces to avoid the weird error related to bitsandbytes
+from bitsandbytes.cuda_setup.main import CUDASetup
+
+setup = CUDASetup.get_instance()
+
 import gradio as gr
 import spaces
 import torch
