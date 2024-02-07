@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ---
 title: Llama 2 13b Chat
 emoji: 🦙
@@ -16,3 +17,6 @@ suggested_hardware: a10g-small
 Llama v2 was introduced in [this paper](https://arxiv.org/abs/2307.09288).
 
 This Space demonstrates [Llama-2-13b-chat-hf](meta-llama/Llama-2-13b-chat-hf) from Meta. Please, check the original model card for details.
+=======
+# LLaMa
+>>>>>>> 99979a52160fa1cd11dd035af5a89ef10e8757a0
