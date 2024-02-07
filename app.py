@@ -11,26 +11,6 @@ MAX_MAX_NEW_TOKENS = 2048
 DEFAULT_MAX_NEW_TOKENS = 1024
 MAX_INPUT_TOKEN_LENGTH = int(os.getenv("MAX_INPUT_TOKEN_LENGTH", "4096"))
 
-DESCRIPTION = """\
-# Llama-2 13B Chat
-
-This Space demonstrates model [Llama-2-13b-chat](https://huggingface.co/meta-llama/Llama-2-13b-chat) by Meta, a Llama 2 model with 13B parameters fine-tuned for chat instructions. Feel free to play with it, or duplicate to run generations without a queue! If you want to run your own service, you can also [deploy the model on Inference Endpoints](https://huggingface.co/inference-endpoints).
-
-🔎 For more details about the Llama 2 family of models and how to use them with `transformers`, take a look [at our blog post](https://huggingface.co/blog/llama2).
-
-🔨 Looking for an even more powerful model? Check out the large [**70B** model demo](https://huggingface.co/spaces/ysharma/Explore_llamav2_with_TGI).
-🐇 For a smaller model that you can run on many GPUs, check our [7B model demo](https://huggingface.co/spaces/huggingface-projects/llama-2-7b-chat).
-
-"""
-
-LICENSE = """
-<p/>
-
----
-As a derivate work of [Llama-2-13b-chat](https://huggingface.co/meta-llama/Llama-2-13b-chat) by Meta,
-this demo is governed by the original [license](https://huggingface.co/spaces/huggingface-projects/llama-2-13b-chat/blob/main/LICENSE.txt) and [acceptable use policy](https://huggingface.co/spaces/huggingface-projects/llama-2-13b-chat/blob/main/USE_POLICY.md).
-"""
-
 if not torch.cuda.is_available():
     DESCRIPTION += "\n<p>Running on CPU 🥶 This demo does not work on CPU.</p>"
 
@@ -41,6 +21,14 @@ if torch.cuda.is_available():
     tokenizer = AutoTokenizer.from_pretrained(model_id)
     tokenizer.use_default_system_prompt = False
 
+DESCRIPTION = """\
+# Hey Suzuki
+"""
+
+LICENSE = """
+<p/>
+Note: Hey Suzuki is currently using LLaMa-13b-chat-hf model in the backend
+"""
 
 @spaces.GPU
 def generate(
@@ -132,16 +120,16 @@ chat_interface = gr.ChatInterface(
         ["Hello there! How are you doing?"],
         ["Can you explain briefly to me what is the Python programming language?"],
         ["Explain the plot of Cinderella in a sentence."],
-        ["How many hours does it take a man to eat a Helicopter?"],
+        ["How many hours it will take to travel from Delhi to Hyderabad by road"],
         ["Write a 100-word article on 'Benefits of Open-Source in AI research'"],
     ],
 )
 
 with gr.Blocks(css="style.css") as demo:
     gr.Markdown(DESCRIPTION)
-    gr.DuplicateButton(value="Duplicate Space for private use", elem_id="duplicate-button")
+    gr.DuplicateButton(value="AGI based Voice Assistant", elem_id="duplicate-button")
     chat_interface.render()
     gr.Markdown(LICENSE)
 
 if __name__ == "__main__":
-    demo.queue(max_size=20).launch()
+    demo.queue(max_size=20).launch(share=True)
